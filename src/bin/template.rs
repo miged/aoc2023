@@ -20,10 +20,10 @@ pub fn main() {
 
 // #[test]
 // fn test_p1() {
-//     assert_eq!(part1(&parse()), 0);
+//     assert_eq!(part1(parse()), 0);
 // }
 
 // #[test]
 // fn test_p2() {
-//     assert_eq!(part2(&parse()), 0);
+//     assert_eq!(part2(parse()), 0);
 // }
