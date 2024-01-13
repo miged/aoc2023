@@ -8,17 +8,40 @@ fn parse() -> Vec<String> {
 fn part1(input: &[String]) -> isize {
     let mut values: Vec<isize> = vec![];
     for string in input {
-        // get first char in string
         let v1 = find_first_number(string);
         let v2: String = string.chars().rev().collect();
         let v2 = find_first_number(&v2);
-        values.push(format!("{}{}", v1, v2).parse().unwrap());
+        values.push(format!("{v1}{v2}").parse().unwrap());
     }
     values.iter().sum()
 }
 
 fn part2(input: &[String]) -> isize {
-    todo!();
+    let replacements = [
+        ("one", "o1e"),
+        ("two", "t2o"),
+        ("three", "t3e"),
+        ("four", "f4r"),
+        ("five", "f5e"),
+        ("six", "s6x"),
+        ("seven", "s7m"),
+        ("eight", "e8t"),
+        ("nine", "n9e"),
+    ];
+
+    let mut values: Vec<isize> = vec![];
+    for line in input {
+        let mut string = line.to_string();
+        for (word, replacement) in replacements {
+            string = string.replace(word, replacement);
+        }
+        let v1 = find_first_number(&string);
+        let v2: String = string.chars().rev().collect();
+        let v2 = find_first_number(&v2);
+        values.push(format!("{}{}", v1, v2).parse().unwrap());
+    }
+
+    values.iter().sum()
 }
 
 fn find_first_number(input: &str) -> char {
@@ -41,7 +64,7 @@ fn test_p1() {
     assert_eq!(part1(&parse()), 56042);
 }
 
-// #[test]
-// fn test_p2() {
-//     assert_eq!(part2(&parse()), 0);
-// }
+#[test]
+fn test_p2() {
+    assert_eq!(part2(&parse()), 55358);
+}

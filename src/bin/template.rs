@@ -5,7 +5,7 @@ fn parse() -> Vec<String> {
         .collect()
 }
 
-fn part1(input: &[String]) -> isize {
+fn part1(_: &[String]) -> isize {
     todo!();
 }
 
