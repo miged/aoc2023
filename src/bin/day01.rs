@@ -5,18 +5,18 @@ fn parse() -> Vec<String> {
         .collect()
 }
 
-fn part1(input: &[String]) -> isize {
-    let mut values: Vec<isize> = vec![];
+fn part1(input: &[String]) -> i32 {
+    let mut sum = 0;
     for string in input {
-        let v1 = find_first_number(string);
-        let v2: String = string.chars().rev().collect();
-        let v2 = find_first_number(&v2);
-        values.push(format!("{v1}{v2}").parse().unwrap());
+        let first = find_first_number(string);
+        let last: String = string.chars().rev().collect(); // reverse string
+        let last = find_first_number(&last);
+        sum += format!("{first}{last}").parse::<i32>().unwrap()
     }
-    values.iter().sum()
+    sum
 }
 
-fn part2(input: &[String]) -> isize {
+fn part2(input: &[String]) -> i32 {
     let replacements = [
         ("one", "o1e"),
         ("two", "t2o"),
@@ -29,19 +29,18 @@ fn part2(input: &[String]) -> isize {
         ("nine", "n9e"),
     ];
 
-    let mut values: Vec<isize> = vec![];
+    let mut sum = 0;
     for line in input {
         let mut string = line.to_string();
         for (word, replacement) in replacements {
             string = string.replace(word, replacement);
         }
-        let v1 = find_first_number(&string);
-        let v2: String = string.chars().rev().collect();
-        let v2 = find_first_number(&v2);
-        values.push(format!("{}{}", v1, v2).parse().unwrap());
+        let first = find_first_number(&string);
+        let last: String = string.chars().rev().collect(); // reverse string
+        let last = find_first_number(&last);
+        sum += format!("{first}{last}").parse::<i32>().unwrap()
     }
-
-    values.iter().sum()
+    sum
 }
 
 fn find_first_number(input: &str) -> char {
