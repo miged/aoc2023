@@ -5,18 +5,17 @@ fn parse() -> Vec<String> {
         .collect()
 }
 
-fn part1(_: &[String]) -> i32 {
+fn part1(_: Vec<String>) -> i32 {
     todo!();
 }
 
-fn _part2(_: &[String]) -> i32 {
+fn _part2(_: Vec<String>) -> i32 {
     todo!();
 }
 
 pub fn main() {
-    let input = parse();
-    println!("DxP1 result: {}", part1(&input));
-    //println!("DxP2 result: {}", part2(&input));
+    println!("DxP1 result: {}", part1(parse()));
+    //println!("DxP2 result: {}", part2(parse()));
 }
 
 // #[test]

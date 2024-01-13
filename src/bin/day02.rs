@@ -27,7 +27,7 @@ fn parse() -> Vec<Game> {
     games
 }
 
-fn part1(games: &[Game]) -> i32 {
+fn part1(games: Vec<Game>) -> i32 {
     let red = 12;
     let green = 13;
     let blue = 14;
@@ -38,9 +38,9 @@ fn part1(games: &[Game]) -> i32 {
         game_num += 1;
         for sets in game {
             for (num, color) in sets {
-                if (color == "red" && num > &red)
-                    || (color == "green" && num > &green)
-                    || (color == "blue" && num > &blue)
+                if (color == "red" && num > red)
+                    || (color == "green" && num > green)
+                    || (color == "blue" && num > blue)
                 {
                     continue 'outer;
                 }
@@ -51,7 +51,7 @@ fn part1(games: &[Game]) -> i32 {
     sum
 }
 
-fn part2(games: &[Game]) -> i32 {
+fn part2(games: Vec<Game>) -> i32 {
     let mut sum = 0;
     for game in games {
         let mut red = 0;
@@ -60,9 +60,9 @@ fn part2(games: &[Game]) -> i32 {
         for sets in game {
             for (num, color) in sets {
                 match color.as_str() {
-                    "red" => red = red.max(*num),
-                    "green" => green = green.max(*num),
-                    "blue" => blue = blue.max(*num),
+                    "red" => red = red.max(num),
+                    "green" => green = green.max(num),
+                    "blue" => blue = blue.max(num),
                     _ => (),
                 };
             }
@@ -73,17 +73,16 @@ fn part2(games: &[Game]) -> i32 {
 }
 
 pub fn main() {
-    let input = parse();
-    println!("D2P1 result: {}", part1(&input));
-    println!("D2P2 result: {}", part2(&input));
+    println!("D2P1 result: {}", part1(parse()));
+    println!("D2P2 result: {}", part2(parse()));
 }
 
 #[test]
 fn test_p1() {
-    assert_eq!(part1(&parse()), 2685);
+    assert_eq!(part1(parse()), 2685);
 }
 
 #[test]
 fn test_p2() {
-    assert_eq!(part2(&parse()), 83707);
+    assert_eq!(part2(parse()), 83707);
 }
