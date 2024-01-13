@@ -16,14 +16,14 @@ fn parse() -> Grid {
 }
 
 fn part1(grid: Grid) -> u32 {
-    let max_rows = grid.keys().map(|&(row, _)| row).max().unwrap() + 1;
-    let max_cols = grid.keys().map(|&(_, col)| col).max().unwrap() + 1;
-    let mut parts: Vec<u32> = vec![];
+    let rows = grid.keys().map(|&(row, _)| row).max().unwrap() + 2;
+    let cols = grid.keys().map(|&(_, col)| col).max().unwrap() + 2;
+    let mut sum = 0;
 
-    for row in 0..max_rows + 1 {
+    for row in 0..rows {
         let mut num: Vec<u32> = vec![];
         let mut part = false;
-        for col in 0..max_cols + 1 {
+        for col in 0..cols {
             let cell = grid.get(&(row, col)).unwrap_or(&'.');
             if cell.is_numeric() {
                 if check_neighbor(&grid, row, col) {
@@ -32,15 +32,21 @@ fn part1(grid: Grid) -> u32 {
                 num.push(cell.to_digit(10).unwrap());
             } else if !num.is_empty() {
                 if part {
-                    let num2: u32 = num.iter().fold(0, |acc, &x| acc * 10 + x);
-                    parts.push(num2);
+                    // convert vec to number
+                    let num: u32 = num
+                        .iter()
+                        .map(|&num| num.to_string())
+                        .collect::<String>()
+                        .parse()
+                        .unwrap();
+                    sum += num;
                     part = false;
                 }
                 num.clear();
             }
         }
     }
-    parts.iter().sum()
+    sum
 }
 
 fn _part2(_: Vec<String>) -> i32 {
@@ -70,7 +76,7 @@ pub fn main() {
 
 #[test]
 fn test_p1() {
-    assert_eq!(part1(parse()), 341535);
+    assert_eq!(part1(parse()), 560670);
 }
 
 // #[test]
