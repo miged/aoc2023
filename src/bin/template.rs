@@ -5,11 +5,11 @@ fn parse() -> Vec<String> {
         .collect()
 }
 
-fn part1(_: &[String]) -> isize {
+fn part1(_: &[String]) -> i32 {
     todo!();
 }
 
-fn _part2(_: &[String]) -> isize {
+fn _part2(_: &[String]) -> i32 {
     todo!();
 }
 
