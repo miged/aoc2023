@@ -24,7 +24,7 @@ fn part2(input: &[String]) -> i32 {
         ("four", "f4r"),
         ("five", "f5e"),
         ("six", "s6x"),
-        ("seven", "s7m"),
+        ("seven", "s7n"),
         ("eight", "e8t"),
         ("nine", "n9e"),
     ];
