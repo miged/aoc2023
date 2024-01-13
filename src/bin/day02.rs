@@ -27,28 +27,25 @@ fn parse() -> Vec<Game> {
 }
 
 fn part1(games: &[Game]) -> i32 {
-    let reds = 12;
-    let greens = 13;
-    let blues = 14;
+    let red = 12;
+    let green = 13;
+    let blue = 14;
     let mut sum = 0;
-    let mut game_num = 1;
+    let mut game_num = 0;
 
-    for game in games {
-        let mut impossible = false;
+    'outer: for game in games {
+        game_num += 1;
         for sets in game {
             for (num, color) in sets {
-                if (color == "red" && num > &reds)
-                    || (color == "green" && num > &greens)
-                    || (color == "blue" && num > &blues)
+                if (color == "red" && num > &red)
+                    || (color == "green" && num > &green)
+                    || (color == "blue" && num > &blue)
                 {
-                    impossible = true;
+                    continue 'outer;
                 }
             }
         }
-        if !impossible {
-            sum += game_num;
-        }
-        game_num += 1;
+        sum += game_num;
     }
     sum
 }
@@ -56,23 +53,20 @@ fn part1(games: &[Game]) -> i32 {
 fn part2(games: &[Game]) -> i32 {
     let mut sum = 0;
     for game in games {
-        let mut reds = 0;
-        let mut greens = 0;
-        let mut blues = 0;
+        let mut red = 0;
+        let mut green = 0;
+        let mut blue = 0;
         for sets in game {
             for (num, color) in sets {
-                if color == "red" && num > &reds {
-                    reds = *num;
-                }
-                if color == "green" && num > &greens {
-                    greens = *num;
-                }
-                if color == "blue" && num > &blues {
-                    blues = *num;
-                }
+                match color.as_str() {
+                    "red" => red = red.max(*num),
+                    "green" => green = green.max(*num),
+                    "blue" => blue = blue.max(*num),
+                    _ => (),
+                };
             }
         }
-        sum += reds * greens * blues;
+        sum += red * green * blue;
     }
     sum
 }
