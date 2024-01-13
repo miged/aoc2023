@@ -7,6 +7,7 @@ fn parse() -> Vec<Game> {
         .lines()
         .filter_map(|line| line.parse().ok())
         .collect();
+
     let mut games: Vec<Game> = vec![];
     for mut line in lines {
         line = line[line.find(':').unwrap() + 2..].to_string();
@@ -16,8 +17,8 @@ fn parse() -> Vec<Game> {
             let split2: Vec<&str> = set.trim().split(',').collect();
             let mut cubes: Set = vec![];
             for str in split2 {
-                let str: Vec<&str> = str.trim().split(' ').collect();
-                cubes.push((str[0].parse::<i32>().unwrap(), str[1].to_string()));
+                let (num, color) = str.trim().split_once(' ').unwrap();
+                cubes.push((num.parse::<i32>().unwrap(), color.to_string()));
             }
             sets.push(cubes);
         }

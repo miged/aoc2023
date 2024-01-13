@@ -38,7 +38,7 @@ fn part2(input: &[String]) -> i32 {
         let first = find_first_number(&string);
         let last: String = string.chars().rev().collect(); // reverse string
         let last = find_first_number(&last);
-        sum += format!("{first}{last}").parse::<i32>().unwrap()
+        sum += format!("{first}{last}").parse::<i32>().unwrap();
     }
     sum
 }
